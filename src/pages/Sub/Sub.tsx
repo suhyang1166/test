@@ -1,24 +1,20 @@
 import React, { useEffect } from "react";
 import { SubSection, SubTextContents, SubTextSection } from "./Sub.styled";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
 import SendMail from "../../components/SendMail/SendMail";
-
-const AccessKey = process.env.REACT_APP_ACCESS_KEY;
-const SecretKey = process.env.REACT_APP_SECRET_KEY;
-
-interface ApiImgInterface {
-  urls: string;
-}
+import { useRandomImgQuery } from "../../hook/useRandomImg";
 
 const Sub: React.FC = () => {
-  // const fetchData = axios
-  //   .get(`https://api.unsplash.com/photos/random?client_id=${AccessKey}`)
-  //   .then((res) => res.data);
+  const { data: urlImg, isLoading, isError, error } = useRandomImgQuery();
+  if (isLoading) {
+    return <h1>Loading...</h1>;
+  }
+  if (isError) {
+    return <h1>{error.message}</h1>;
+  }
 
-  // console.log("data", fetchData);
+  console.log("data", urlImg);
   return (
-    <SubSection>
+    <SubSection $BG={urlImg?.full}>
       <SubTextContents>
         <h3>Sed ut perspiciatis unde omnis</h3>
         <SubTextSection>

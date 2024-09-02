@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 interface InputProps {
-  hasError: boolean;
+  $hasError: boolean;
 }
 
 interface ButtonProps extends InputProps {
-  isEmpty: boolean;
+  $isEmpty: boolean;
 }
 
 export const Article = styled.article`
@@ -15,6 +15,7 @@ export const Article = styled.article`
   justify-content: center;
   gap: 20px;
   h3 {
+    color: ${({ theme }) => theme.colors.white};
     font-family: ${({ theme }) => theme.fonts.exo2};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     font-size: ${({ theme }) => theme.fontSizes.small};
@@ -48,7 +49,7 @@ export const Button = styled.button<ButtonProps>`
   border: none;
   background-color: transparent;
   z-index: 1;
-  opacity: ${({ isEmpty, hasError }) => (isEmpty ? 1 : hasError ? 0.5 : 1)};
+  opacity: ${({ $isEmpty, $hasError }) => ($isEmpty ? 1 : $hasError ? 0.5 : 1)};
   cursor: pointer;
 `;
 
@@ -74,8 +75,8 @@ export const Input = styled.input<InputProps>`
   &:focus {
     border: 1px solid transparent;
     outline: 1px solid
-      ${({ theme, hasError }) =>
-        hasError ? theme.colors.invalid : theme.colors.vibrantGreen};
+      ${({ theme, $hasError }) =>
+        $hasError ? theme.colors.invalid : theme.colors.vibrantGreen};
     color: ${({ theme }) => theme.colors.white};
   }
 `;

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-export const SubSection = styled.section`
+interface backgroundProps {
+  $BG: string;
+}
+
+export const SubSection = styled.section<backgroundProps>`
   width: 100vw;
   height: 100vh;
   padding: 0 80px;
@@ -11,7 +15,6 @@ export const SubSection = styled.section`
   gap: 16%;
   text-align: center;
   position: relative;
-  color: ${({ theme }) => theme.colors.white};
   &::before {
     content: "";
     position: absolute;
@@ -19,7 +22,17 @@ export const SubSection = styled.section`
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: pink;
+    background: url(${({ $BG }) => $BG}) center/cover no-repeat;
+    z-index: -2;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
   }
 `;
@@ -33,6 +46,7 @@ export const SubTextContents = styled.article`
   gap: 23px;
   h3 {
     width: 100%;
+    color: ${({ theme }) => theme.colors.white};
     font-family: ${({ theme }) => theme.fonts.montserrat};
     font-weight: ${({ theme }) => theme.fontWeights.bold};
     font-size: ${({ theme }) => theme.fontSizes.large};

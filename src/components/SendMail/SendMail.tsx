@@ -41,9 +41,13 @@ const SendMail: React.FC = () => {
           placeholder="Enter your email"
           value={email}
           onChange={handleEmailChange}
-          hasError={!!errorMessage}
+          $hasError={!!errorMessage}
         />
-        <Button type="submit" hasError={!!errorMessage} isEmpty={email === ""}>
+        <Button
+          type="submit"
+          $hasError={!!errorMessage}
+          $isEmpty={email === ""}
+        >
           <img src={ICON} alt="sendImg" />
         </Button>
         {errorMessage && email !== "" && <p>{errorMessage}</p>}
